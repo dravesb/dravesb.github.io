@@ -7,7 +7,7 @@
  */
 
 html {
-  font-family: "Times New Roman"; /* 1 */
+  font-family: 'Arial'; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -ms-text-size-adjust: 100%; /* 2 */
 }
@@ -428,7 +428,7 @@ th {
 
 /* LAYOUT STYLES */
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
@@ -647,7 +647,7 @@ form {
 #main-content h3 {
   margin-top: 24px;
   margin-bottom: 8px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: bold;
   color: #474747;
