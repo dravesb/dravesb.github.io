@@ -441,10 +441,10 @@ p {
 }
 
 a {
-  color: #ff0000;
+  color: #C0C0C0;
 }
 a:hover {
-  color: #00ffff;
+  color: #ff0000;
 }
 
 header {
