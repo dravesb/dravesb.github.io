@@ -42,13 +42,14 @@ br {
           <h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Software Tutorial</h3>
 
-<p> Here is a descrption of picture 1</p>
+<p> First and foremost, PTrees generates familiar structure based on a number of parameters found in the configuration file. The number of families, generations, probability of reproduction, maximum number of offspring, and minimum number of offspring are all specified. For an example of such a configuration file, see config.txt in the PTrees repository. Simulated in Java, these familiar tree structures are generated. A set of examples are presented below. </p>
+<p>This first example shows a familiar structure with 8 generations. In the configuration file, 10 generations were requested, but due to the probabilistic nature of reproduction in the software, this parameter simply does not let the tree grow past height 10. This is is a simple, one family tree where all individuals are related.</p>          
 <center><img src="/images/ptrees-1.png" alt="Me" style="width:500px;height:400px;"></center>
           
-<p> Here is a descrption of picture 2</p>  
+<p> The second example shows three separate families of varying height, relationship. You can imagine how noisy a relationship matrix for this type of population may be. For instance in the family found in the bottom right of the image, the leaf individuals share only 0.01953125% genetic material. Deciphering between this relationship and the estimated relationship between unrelated individuals is a very hard task indeed (hence Treelets Covariance Smoothers!).</p>  
 <center><img src="/images/ptrees-2.png" alt="Me" style="width:550px;height:400px;"></center>
 
-<p> Here is a descrption of picture 3</p>          
+<p>This third example shows a very confusing structure. Several unrelated individuals (randoms) are introduced to mask the distance relationship either further. This example is much more realistic for what a practitioner would see - several unrelated people which little know structure.</p>          
 <center><img src="/images/ptrees-3.png" alt="Me" style="width:600px;height:400px;"></center>
 
 <p>Great Ben, you can make pretty pictures. But what about all the neat genetic panels you said you could generate? Excellent question!</p>          
