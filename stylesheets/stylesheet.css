@@ -444,7 +444,7 @@ a {
   color: #C0C0C0;
 }
 a:hover {
-  color: #00ffff;
+  color: black;
 }
 
 header {
@@ -641,7 +641,7 @@ form {
   padding-right: 0.3em;
   margin-left: -1.5em;
   content: "//";
-  color: #00ffff;
+  color: black;
 }
 
 #main-content h3 {
@@ -658,7 +658,7 @@ form {
   padding-right: 0.3em;
   margin-left: -2em;
   content: "///";
-  color: #00ffff;
+  color: black;
 }
 
 #main-content h4 {
