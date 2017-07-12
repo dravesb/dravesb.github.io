@@ -451,7 +451,7 @@ header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-  backgroun-image: url(../images/header-bn.jpg) no-repeat; 
+  backgroun-image: url(../images/header-bn.jpg) repeat-y; 
 
   border-bottom: solid 1px #275da1;
 }
