@@ -454,7 +454,6 @@ header {
   background-image: url(../images/header-bn.jpg);
   background-repeat: no-repeat;
   background-position: right top;
-  background-attachment: fixed;
   border-bottom: solid 1px #275da1;
 }
 
