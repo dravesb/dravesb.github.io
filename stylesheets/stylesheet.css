@@ -452,6 +452,7 @@ header {
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
   backgroun-image: url(../images/header-bn.jpg); 
+  background-repeat: no-repeat;
   border-bottom: solid 1px #275da1;
 }
 
