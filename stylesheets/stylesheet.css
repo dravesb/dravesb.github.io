@@ -451,8 +451,8 @@ header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-  background: #000000 url(../images/header-bn.jpg) 0 0 repeat-x;
- 
+  background: #000000 url(../images/header-bn.jpg) 0 0 repeat-x; 
+  background-size: 40px 100px;
   border-bottom: solid 1px #275da1;
 }
 
