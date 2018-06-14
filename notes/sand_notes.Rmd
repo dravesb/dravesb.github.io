@@ -19,6 +19,13 @@ output:
 
 ## Chapter 6 - Models for Network Graphs 
 
+#### 6.1 Introduction 
+
+#### 6.2 Random Graph Models 
+
+#### 6.3 Small-World Models
+
+
 ## Chapter 7 - Network Topology Inference 
 
 ## Chapter 8 - Modeling & Prediction for Processes on Network Graphs 
