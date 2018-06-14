@@ -1,0 +1,31 @@
+---
+title: "Statistical Analysis of Network Data - Notes"
+author: "Benjamin Draves"
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: github
+---
+
+## Chapter 1 - Introduction 
+
+## Chapter 2 - Preliminaries 
+
+## Chapter 3 - Mapping Networks 
+
+## Chapter 4 - Descriptive Analysis of Network Data 
+
+## Chapter 5 - Sampling and Estimation in Network Graphs 
+
+## Chapter 6 - Models for Network Graphs 
+
+## Chapter 7 - Network Topology Inference 
+
+## Chapter 8 - Modeling & Prediction for Processes on Network Graphs 
+
+## Chapter 9 - Anaysis of Network Flow Data
+
+## Chapter 10 - Graphical Models 
+
+
+
