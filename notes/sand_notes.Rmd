@@ -28,35 +28,42 @@ Most common, a \textit{random graph model} is specified by defining a class of n
 $$\mathcal{G}\overset{unif. sample}{\longrightarrow}G\overset{sampled. version}{\longrightarrow}G^{*}$$ Another clear application is in hypothesis testing. By creating this sampling distribution, we can determine if a characteristic $\eta(G^{*})$ is significant by comparing it to the reference set $\{\eta(G):G\in\mathcal{G}\}$. Enumerating these possibilities is often quite difficult for interesting classes $\mathcal{G}$ so several computational alternatives have been derived.
 
 The \textit{classical random graph models} were established by Erdos and Renyi where they specified a class of random networks with fixed number of edges and vertices $(N_E, N_V)$ with $G\in\mathcal{G}_{N_{V},N_{E}}$ having this property $\mathbb{P}(G) = \binom{N}{N_{E}}^{-1}$ where $N = \binom{N_V}{2}$. In this way, each network with these fixed parameters are assigned equal probabilities. Gilbert designed a similar class of networks where only $N_V$ was fixed and each edge in the network was assigned with probability $p\in(0,1)$. When $p$ is appropriately defined $N_E \sim pN_V$ these two models are asymptotically equivalent. Some properties of Gilbert's model (which is generally refered to as \textit{the} classical graph model) are given below. 
-\begin{itemize}
-\item If $p = c/N_V$ and $c>1$ then whp, their will be a single connected component with $O(N_V)$ vertices (called the \textit{giant component}) and the other smaller components will only have $O(\log N_V)$. If $c<1$ then whp all components will have the smaller $O(\log N_V)$ size. 
-\item In the $c>1$ case, the density of the graph will be $p\sim N_V^{-1}$ so $G$ is expected to be sparse for large $N_V$. 
+
+* If $p = c/N_V$ and $c>1$ then whp, their will be a single connected component with $O(N_V)$ vertices (called the \textit{giant component}) and the other smaller components will only have $O(\log N_V)$. If $c<1$ then whp all components will have the smaller $O(\log N_V)$ size. 
+* In the $c>1$ case, the density of the graph will be $p\sim N_V^{-1}$ so $G$ is expected to be sparse for large $N_V$. 
 \item Under the sample $p = c/N_V$ model, for large $N_V$ the degree distribution $f_d(\cdot)\sim\text{Pois}(c)$. 
-\item Under this model, clustering is not expected 
-\item These networks contain the \textit{small world property}: whp, the diameter varies like $O(\log N_V)$ when $N_V\to\infty$ 
-\end{itemize}
+* Under this model, clustering is not expected 
+*These networks contain the \textit{small world property}: whp, the diameter varies like $O(\log N_V)$ when $N_V\to\infty$ 
+
 
 We can generalize the Erdos-Reyni models to attain the \textit{generalized random graph models}. Specifically, we fix $N_V$ and define $\mathcal{G}$ such that each network has some property and then assign equally probability of sampling across this class $\mathcal{G}$. In the classical model, we define one such characteristic being that each edge is assigned with probability $p\in(0,1)$. In the Erdos-Reyni model, we specified $N_E$. Another possible declaration is defining the degree sequence of the network (which then in turn specifies $N_E$ which additional structure). Several different papers/models relating to this degree specification have been developed and studied - mostly with regard to the emergence of giant components and other network typologies.
 
 In order the leverage the models discussed here, sampling/simulation for these networks is crucial. Most such algorithms are designed around the popular MCMC methodology. For the classical random graph model, we could simply generate the $\binom{N_V}{2}$ Bernoulli random variables but if $p\sim N_V^{-1}$ the network is quite sparse and hence a $O(N_V^2)$ is not at all desirable. An $O(N_V + N_E)$ algorithm is developed, where for each vertex, the other $N_V-1$ edges are ordered/indexed. Then a single draw from a geometric RV with parameter $p$ allows for the algorithm to "skip" the possible edges as teh waiting time of $N_V-1$ bernoullis is given by a geometric RV. This process is then repeated for the remaining edges in the network. One possible drawback to this algorithm is simply that edges are now correlated. Another algorithm is given by prespecifying $N_E$ and then simply placing unique edges in the network until this number is attained. This algorithm runs in $O(N_E+N_V)$ time. 
 
 Generating generalized random graphs is usually considerablly more difficult. Here we focus on the networks with a specified degree sequence. Two of the most popular are (a) \textit{matching algorithms} and (b) \textit{switching algorithms}. Matching algorithms are explained as follows 
-\begin{enumerate}
-\item Specify an ordered degree sequence $\{d_{(1)},\ldots, d_{(N_V)}\}$ 
-\item For each vertex $i = 1,2,\ldots, N_V$, create a list containing a total of $d_{(i)}$ copies of the vertex $i$. 
-\item Sample pairs from this list with equal probability
-\item Remove the sampled pair for the list 
-\item Iterate until the list is empty
-\end{enumerate}
+
+1. Specify an ordered degree sequence $\{d_{(1)},\ldots, d_{(N_V)}\}$ 
+2. For each vertex $i = 1,2,\ldots, N_V$, create a list containing a total of $d_{(i)}$ copies of the vertex $i$. 
+3. Sample pairs from this list with equal probability
+4. Remove the sampled pair for the list 
+5. Iterate until the list is empty
+
 In the cases where a vertex is matched with itself, or their are multi-edges, the graph is discarded and the process repeated. This can be quite inefficient in practice so monitoring the pairs selected is usually a practical solution used (even though it produces bias in the sampling sequence). Another alternative is to sample so that no existing pair can be sampled again. Chen, Diaconis, Holmes, and Liu develop an algorithm that treats the problem as a sequential assignment problem and have seen decent results in practice. Wether the algorithm is scalable to sparse graphs is yet to be seen. Switching algorithms are generally more simple and can be explained as follows 
-\begin{enumerate}
-\item Starting from an initial degree sequence $\{d_{(1)}, \ldots, d_{(N_V)}\}$ construct an initial graph $G^{(1)}$
-\item Randomly select two edge $e_1 = \{u_1, v_1\}$ and $e_2 = \{u_2, v_2\}$ 
-\item Swith the edge to attain $e_1^{*} = \{u_1, v_2\}$ and $e_2^{*} = \{u_2, v_1\}$
-\item Remove $e_1, e_2$ and replace with $e_1^{*}$ and $e_2^{*}$ (assuming neither exist) to attain $G^{(2)}$
-\item Iterate sifficiently long to attain sample 
-\end{enumerate}
-This algorithm falls with the MCMC category so the limiting theory guartenees convergence (but no such rate or assumption testing really exists). Other MCMC type algorithms exist for other specifications of the generalized random graphs.  
+
+1. Starting from an initial degree sequence $\{d_{(1)}, \ldots, d_{(N_V)}\}$ construct an initial graph $G^{(1)}$
+2. Randomly select two edge $e_1 = \{u_1, v_1\}$ and $e_2 = \{u_2, v_2\}$ 
+3. Swith the edge to attain $e_1^{*} = \{u_1, v_2\}$ and $e_2^{*} = \{u_2, v_1\}$
+4. Remove $e_1, e_2$ and replace with $e_1^{*}$ and $e_2^{*}$ (assuming neither exist) to attain $G^{(2)}$
+5. Iterate sifficiently long to attain sample 
+
+This algorithm falls with the MCMC category so the limiting theory guartenees convergence (but no such rate or assumption testing really exists). Other MCMC type algorithms exist for other specifications of the generalized random graphs. 
+
+Some of the primary reasons that we develop these problistic models is to use them statistical in estimation and significance assessment. Here they present a MOM type development of model parameters in the classical random models setting where the goal of inference is to uncover $N_V$. By estimating first $p$ then an estimate of $N_V$ is developed. Additionally, if the goal is to estimate some characteristic $\eta(G)$, we could instead just building estimators for the class $\{\eta(G):G\in\mathcal{G}\}$ as opposed to using a pluggin estimator $\eta(\widehat{G})$. For assessing signficance, we could use our model to build a reference distribution but as we noted above, there are sever computational concerns with this approach. Some of these issues can be remedied by placing more restrictive conditions on the generalized random grah models to reduced the computational time to process this reference distribution (e.g. number of vertices in each group). 
+
+For a concrete example, the consider the karate network with the goal to test to the significance of the network clustering coefficient. In this, they build two reference distributions - one with a fixed number of edges and one with a fixed degree distribution. From here, they bootstrap the $\eta(\cdot)$ statistic to preform statistical "testing" and signficance assessment. Another application is in \textit{motif identification} where a \textit{motif} is defined to be a subgraph structure that reappears throughout a collection of observed networks. (In some sense motifs, define the building blocks of in which networks are constructed.) They do so by calculating relative frequencies of observed subgraphs $L_k$ over $k$ vertices. Similar to the karate network, they define a reference distribution in order to find those extreme distributions of interest. Clearly, there are sever computational concerns with this approach to network analysis, but there are certain sampling techniques that offer some good solutions to these problems. 
+
+
+
 
 #### 6.3 Small-World Models
 
