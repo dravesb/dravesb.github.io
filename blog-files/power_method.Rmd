@@ -1,0 +1,121 @@
+---
+title: "Power Method"
+author: "Benjamin Draves"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: vignette
+---
+
+##Motivation 
+In most undergraduate linear algebra courses, students first learn to calculate eigenvalues of a matrix $\mathbf{A}\in\mathbb{R}^{n\times n}$ by identifying the roots of the corresponding characteristic polynomial $det(\mathbf{A} -\lambda\mathbf{I}_n)$. While this technique offers a pedagogically appealing approach, most computer systems will struggle to identify such roots as $n$ grows past moderate sizes. Several numerical approaches have been studied and used with varying success but are oftentimes subject to rounding errors. 
+
+The _Power Method_, or sometimes called the _Power Iteration_, is an iterative procedure that approximates the dominate eigenvalue(vector) or a diagnonalizable matrix. One particularly attractive property of this method is that it only requires repeated multiplication of a matrix $\mathbf{A}$ with a vector $\mathbf{x}\in\mathbf{R}^{n\times 1}$ - a computation that is optimized in almost every programming environment imaginable. Moreover, as evident in the proof, we can understand the rate of convergence as a function of the eigenstructure of $\mathbf{A}$. First, we review some basic linear algebra factoids useful in the presentation below. 
+
+***
+## Preliminaries
+
+> **Def:** Let $\Lambda = \{\lambda_i: 1\leq i \leq n\}$ be the set of eigenvalues corresponding to a matrix $\mathbf{A}\in\mathbb{R}^{n\times n}$. Then the _dominant eigenvalue_ of $\mathbf{A}$, $\lambda_1\in\Lambda$, is the eigenvalue with the property $$|\lambda_1|>|\lambda_i|\quad i = 2, \ldots,n$$
+The _dominant eigenvector_, $x_1$, is the corresponding eigenvector that satisfies $$\mathbf{A}x_1 = \lambda_1x_1$$
+
+> **Def:** A matrix $\mathbf{A}\in\mathbb{R}^{n\times n}$ is said to be _diagonizable_ if and only if it can be written as $$\mathbf{A} = \mathbf{UDU}^{-1}$$ where $\mathbf{D}\in\mathbb{R}^{n\times n}$ is a diagnol matrix and $\mathbf{U}\in\mathbb{R}^{n\times n}$ is a nonsingular matrix. 
+
+> **Theorem:** A matrix $\mathbf{A}\in\mathbb{R}^{n\times n}$ is diagonalizable if and only if it has $n$ linearly indepdent eigenvectors. 
+
+> **Theorem:** If $x$ is an eigenvector of an $n\times n$ matrix $\mathbf{A}$, then its corresponding eigenvalue is given by the Rayleigh Quotient $$ \frac{\mathbf{A} x\cdot x}{x\cdot x} = \frac{(\lambda x)\cdot x}{x\cdot x} = \frac{\lambda(x\cdot x)}{x\cdot x} = \lambda$$
+
+***
+## The Power Method
+Suppose that the diagonizable matrix $\mathbf{A}\in\mathbb{R}^{n\times n}$ has a dominate eigenvector. Then it's dominate eigenvector can be approximated by the following iterative procedure 
+
+Input: Diagonalizable matrix $\mathbf{A}$ with dominate eigenvalue.
+
+1. Initialize a nonzero vector $x_0\in\mathbb{R}^{n\times 1}$
+2. Until convergence, $i = 1, 2, \ldots, m$:
+     + Let $\tilde{x}_{i}$ = \mathbf{A}x_{i-1}
+     + Let $c_i = \max(\tilde{x}_i)$
+     + Update sequence $x_i = \frac{1}{c_i}\tilde{x}_i$
+
+Output: $(x_{m}, \frac{\mathbf{A}x_{m}\cdot x_{m}}{x_{m}\cdot x_{m}})$ an approximation of the dominate eigenvector and eigenvalue of $\mathbf{A}$. 
+
+Notice here that we iteratively scale the approximation so that all the entries of the approximation are less than 1 in absolute value. As eigenvectors are invariant under scalar multiplication, we do no concern ourselves with the scale at which our approximation is given. In fact, as we will see in the proof, the _Power Method_ only recovers the dominate eigenvector up to scaling by a constant. 
+
+***
+## Proof of Convergence
+Before we give the proof of convergence of the _Power Method_, we first give a formal statement of the convergence result.
+
+> **Theorem:** Let $\mathbf{A}\in\mathbb{R}^{n\times n}$ be a diagonalizable matrix with a dominate eigenvalue. Then, there exists $x_0\in\mathbb{R}^{n\times 1}$ such that we have $$\lim_{k\to\infty}\mathbf{A}^{(k)}x_0 = cv_d$$ where $v_d$ is the dominate eigenvector and $c\in\mathbb{R}$.  
+
+> **Proof:** By assumption, $\mathbf{A}$ is diagonalizable. Therefore, the set of eigenvectors $\{x_i: 1\leq i \leq n\}$ are linearly independent. Moreover, they serve as basis for $\mathbb{R}^{n}$. As $x_0\in\mathbb{R}^n$ we can write it in terms of this basis as $$x_0 = \sum_{i=1}^nc_ix_i$$ for some set of coeffiecent $\{c_i\in\mathbb{R}:1\leq i\leq n\}$. Here, we restrict our choices of $x_0$ to vectors such that $c_1 \neq 0$. Now, index the eigenvalues of $\mathbf{A}$ such that $|\lambda_1|>|\lambda_2|\geq \dots\geq |\lambda_n|$. 
+Multiplying both sides of this equation by $\mathbf{A}$ we arrive at the following $$\mathbf{A}x_0 = \mathbf{A}\sum_{i=1}^nc_ix_i= \sum_{i=1}^nc_i(\mathbf{A}x_i)= \sum_{i=1}^nc_i\lambda_ix_i$$ Repeatedly multiplying this equation by $\mathbf{A}$, we arrive at the following form $$
+\mathbf{A}^{(k)}x_0 = \sum_{i=1}^nc_i\lambda_i^{k}x_i$$ Now factoring $\lambda_1^k$ out of this sum, we have $$\mathbf{A}^{(k)}x_0 =  \lambda_1^k\left\{c_1x_1 + \sum_{i=2}^nc_i\left(\frac{\lambda_i}{\lambda_1}\right)^k\right\}$$
+Now, by assumption $\Big|\frac{\lambda_i}{\lambda_1}\Big|<1$, so as $k\to\infty$, $(\lambda_i/\lambda_i)^k\to 0$ for $i = 2, \ldots, n$. With this convergence, we arrive at the approximation for large $k$, $$\mathbf{A}^{(k)}x_0\cong \lambda_1^kc_1x_1$$ Defining $c = \lambda_1^kc_1$, and as $x_1$ is the dominate eigenvector, this completes the proof. 
+
+With the convergence now established, the proof also provides insight into the rate of convergence of this algorithm. Indeed, the proof reveals that rate limiting quantity is given by $\Big|\frac{\lambda_2}{\lambda_1}\Big|$. The absolute-size of this quantity directly determines both the convergence rate as well as a first-order estimate of the error of the procedure. 
+
+***
+## Example
+Consider the matrix $$\mathbf{A} = \begin{bmatrix}-4 & 10\\ 7 & 5\end{bmatrix}$$
+$\mathbf{A}$ has eigenvalues $\vec{\lambda} = (10, -9)$ with corresponding eigenvectors $(\frac{5}{7}, 1)$ and $(-2,1)$. Consider the first thirty approximations of the _Power Method_ given below. 
+
+```{r}
+#Define Matrix 
+A = matrix(c(-4,7,10,5), nrow = 2)
+
+#Define initial num of iterations 
+m = 30 
+
+#Define initial vector
+x = matrix(NA,ncol = m, nrow = 2)
+colnames(x) = paste("Iteration:", 1:m, sep = "")
+x[,1] = matrix(c(3,2), nrow = 2)
+
+#Iterate up until m
+for(i in 2:m){
+  tmp = A%*%as.matrix(x[,i-1])
+  x[,i] = 1/max(tmp) * tmp
+}
+#output results in table form
+library(knitr)
+kable(x[,c(10, 15, 20, 25, 30)])
+```
+
+As $\Big|\frac{\lambda_2}{\lambda_1}\Big|$ is relatively large in this setting, we see that the convergence takes a nontrivial amount of time. Notice however, by the 30th iteration, the _Power Method_ provides an accurate estimate of the dominating eigenvector. For a visualization of this convergence, consider the two figures below.
+
+```{r}
+#get eigenvalue approximation list
+mult = function(y) sum((A%*% y) *(y))/(sum(y*y)) 
+val = apply(x, 2, mult)
+
+#make eigenvector plot
+library(ggplot2)
+df1 = data.frame(cbind(11:m, t(x[,-(1:10)])))
+colnames(df1) = c("Name", "Dim1", "Dim2")
+ggplot(aes(x = Dim1, y = Dim2), data = df1) + 
+  geom_point()+
+  geom_point(x = 0.714, y = 1, col = "red")+
+  labs(title = "Dominate Eigenvector Approximation")+
+  theme_bw()
+```
+
+Above is the final twenty approximations of the dominant eigenvector given by the  _Power Method_. In red point is the true eigenvector value. It appears that this sequence of approximations exhibit an oscillatory behavior around the true eigenvector $(\frac{5}{7},1)$. 
+
+```{r}
+#make eigenvalue plot
+df2 = data.frame(cbind(2:m, val[2:m]))
+colnames(df2) = c("Iteration_Number", "Eigenvalue_Approximation")
+ggplot(aes(x = Iteration_Number, y = Eigenvalue_Approximation), data = df2)+
+  geom_line()+
+  geom_hline(yintercept = 10, col = "red", linetype = "dashed")+
+  theme_bw()
+```
+
+Above is approximated dominate eigenvalue plotted against the iteration number. The dashed red line represents the true dominant eigenvalue in this setting. It is clear that the _Power Method_'s approximation of this value is converging to the true dominant eigenvalue.  
+
+
+***
+## Conclusions & Future Topics
+The _Power Method_ offers a simple, iterative approach to calculating the dominate eigenvector and dominate eigenvalue of a diagonalizable matrix. Moreover, as we've seen here, the proof reveals that $\Big|\frac{\lambda_2}{\lambda_1}\Big|$ controls the rate of convergence of the algorithm. 
+
+While the _Power Method_ offers an approach to calculating the _dominate_ eigenvalue and eigenvector, the method can be extended to calculate finding other eigenvectors through a process entitled _delflation_. More general eigenvector and eigenvalue methods, such as the _QR Algorithm_, offer alternative solutions to finding the eigenvectors and eigenvalues of a matrix. 
+
