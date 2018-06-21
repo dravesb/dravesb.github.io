@@ -62,11 +62,42 @@ Some of the primary reasons that we develop these problistic models is to use th
 
 For a concrete example, the consider the karate network with the goal to test to the significance of the network clustering coefficient. In this, they build two reference distributions - one with a fixed number of edges and one with a fixed degree distribution. From here, they bootstrap the $\eta(\cdot)$ statistic to preform statistical "testing" and signficance assessment. Another application is in \textit{motif identification} where a \textit{motif} is defined to be a subgraph structure that reappears throughout a collection of observed networks. (In some sense motifs, define the building blocks of in which networks are constructed.) They do so by calculating relative frequencies of observed subgraphs $L_k$ over $k$ vertices. Similar to the karate network, they define a reference distribution in order to find those extreme distributions of interest. Clearly, there are sever computational concerns with this approach to network analysis, but there are certain sampling techniques that offer some good solutions to these problems. 
 
-
-
-
 #### 6.3 Small-World Models
 
+#### 6.5 Exponential Random Graph Models (ERGMs)
+
+Most of the models considered up to this point fail to encapsulate some of the primary objectives that a statistical model should have. An ERGM attempts to adapt the celebrated exponential family to the random network framework. From here, we may use results derived in more classical settings for this datastructure. 
+
+A random vector $\mathbf{Z}$ is said to belong to an _exponential family_ if its pmf can be expressed as follows $$\mathbb{P}_{\theta}(\mathbf{Z} = \mathbf{z}) = \exp\{\theta^{T}\mathbf{g}(\mathbf{z}) - \psi(\theta)\}$$ where $\theta\in\mathbb{R}^{p\times 1}$ is a vector of parameters, $\mathbf{g}(\cdot)$ is a $p$-dimensional function, and $\psi(\theta)$ is a normalization term. Now extending this framework to network data, suppose that we have a graph $G = (V,E)$ with $Y_{ij} = Y_{ji}$ be a binary random variable indicating the presence of an edge. Thus, $\mathbf{Y} = (Y_{ij})$ is the random adjacency matrix of $G$. Let $\mathbf{y} = (y_{ij})$ be a random realization of $\mathbf{Y}$. An ERGM is then a specification of the joint distribution of the elements of $\mathbf{Y}$ given by $$\mathbb{P}_{\theta}(\mathbf{Y} = \mathbf{y}) = \left(\frac{1}{\kappa}\right)\exp\left\{\sum_{H}\theta_{H}g_H(\mathbf{y})\right\}$$ 
+where 
+
+* $H$ is a _configuration_ : set of possible edges amoung a subset of vertices in $G$
+* $g_H(\mathbf{y}) = \prod_{y_{ij}\in H}y_{ij} \in \{0,1\}$ which is zero of the configuration is in $\mathbf{y}$ and zero otherwise
+* $\theta_H\neq 0$ means that, conditional on the rest of the graph, $\mathbf{Y}_{ij}$ are dependent for all pairs of vertices in $H$
+* $\kappa$ a normalizing constant 
+
+This model has a pretty complex dependence structure due to the third bullet point here. It assumes that subset of edges are independent of one another given the reamining edges. See the **Hammersley - Clifford Theorem** for more conditions on this probability structure. 
+
+**Ex**: Suppose that $Y_{ij}\perp Y_{i'j'}$. The means that $\theta_H = 0$ for $|H|>2$ (see the third bullet above). Therefore, the only function of interest $g_H(\mathbf{y}) = y_{ij}$ and our ERGM is given by $$\mathbb{P}_{\theta}(\mathbf{Y} = \mathbf{y}) = \left(\frac{1}{\kappa}\right)\exp\left\{\sum_{(i,j)}\theta_{ij}y_{ij}\right\}$$ Notice that this model specifices every single parameter $p_{ij} = \text{logit}(\theta_{ij})$ resulting in $N_V^2$ parameters. To reduce the number of parameters, we assume homogeneity across $G$ such that $\theta_{ij}  \equiv \theta$ which results in the model $$\mathbb{P}_{\theta}(\mathbf{Y} = \mathbf{y}) = \left(\frac{1}{\kappa}\right) \exp\{\theta L(\mathbf{y})\}$$ where $L(\mathbf{y}) = \sum_{ij}y_{ij} = N_e$ which is the classic Bernoulli RGM. 
+
+**Ex**: If we make the same assumptions in the previous model, but assume that the vertices comprise two different classes $S_i$, $i=1,2$. Here we could impose homogeneity withing and between sets and arrive at the model of the form 
+
+$$\mathbb{P}_{\theta}(\mathbf{Y} = \mathbf{y}) = \left(\frac{1}{\kappa}\right) \exp\{\theta_{11} L_{11}(\mathbf{y}) + \theta_{22} L_{22}(\mathbf{y}) + \theta_{12} L_{12}(\mathbf{y})\}$$ where $L_{ij}(\mathbf{y})$ is the number edges between group $i$ and $j$ and where the probability model is homogenous across these sets. 
+
+**Ex**: Extending dependency structure, the _Markov Dependence_ for network graph models specificies that two edges are dependent if they share a common vertex. A random graph with property is called a _Markov Graph_. Frank and Strauss show that a graph is a markov graph if and only if its probability function can be expresses follows 
+$$\mathbb{P}_{\theta}(\mathbf{Y} = \mathbf{y}) = \left(\frac{1}{\kappa}\right)\exp\left\{\sum_{k=1}^{N_v -1}\theta_kS_k(\mathbf{y}) + \theta_{\tau}T(\mathbf{y})\right\}$$ where 
+
+* $S_1(\mathbf{y}) = N_e$ is the number of edges 
+* $S_k(\mathbf{y})$ is the number of _k-starts_: a tree with one vertex of degree $k$ and $k$ vertices of degree 1
+* $T(\mathbf{y})$ is the number of triangles
+
+$\theta_k$ is successively higher-order effects in the model for larger values of $k$. Clearly fitting this model for larger values of $k$ is oftentimes computationally infeasible and difficult to interpret. One solution is to put a parameter constraint on the $\theta_k$ such that $\theta_k\propto (-1)^k\lambda^{2-\lambda}$ for all $k\geq 2$ and for $\lambda\geq 1$. This approach combines all $k\geq 2$ stars terms into a single term given by $$AKS_{\lambda}(\mathbf{y}) = \sum_{k = 2}^{N_v - 1}(-1)^{k}\frac{S_k(\mathbf{y})}{\lambda^{k-2}}$$ with corresponding parameter $\theta_{AKS}$. This, and other pamametric constraints, offer different relations to the weighted degree counts and weight this distribution in different ways. 
+
+The ERGM framework also allows for incorporation of vertex specific information. Instead, you can specificy the conditional distribution $\mathbb{P}_{\theta}(\mathbf{Y} = \mathbf{y}|\mathbf{X} = \mathbf{x})$ typical in most regression settings. 
+
+To estimate the parameters $\theta_H$ most statisticians use the MLE framework. But with the highly dependent structure, asympototic results have yet to be developed. The goal of most MLE's is to maximize $$\ell(\theta) = \theta^T\mathbf{g}(\mathbf{y}) - \psi(\theta)$$ where $\psi(\theta) = \log(\kappa(\theta))$. Taking derivatives one each side and using $\psi(\theta)$ as a cumulant function, we see that the MLE is the solution to the set of equations $$\mathbb{E}_{\hat{\theta}}(\mathbf{g}(\mathbf{Y})) = \mathbf{g}(\mathbf{y})$$ But notice that since $\psi(\theta)$ is a sum over $2^{\binom{N_v}{2}}$, working with this explicitly is infeasible especially when we must do this for multiple values of $\theta$. Two MCMC solutions exist: one that approximates $\ell(\theta)$ and one that approximates the solutions to $\mathbb{E}_{\hat{\theta}}(\mathbf{g}(\mathbf{Y})) = \mathbf{g}(\mathbf{y})$. Each algorithm relies on being able to sample from the model itself which is typyically done via a Gibbs sampler. Other computational approaches to this problem exist such as maximimizing the psuedo-likelihood. 
+
+Model fitting currently in this class of models is done mostly by comparing the fit model to several random draws from the distributon. The authors also comment on model degenercy - the result of a model fit putting much mass on the empty or complete graph. There are several sources that look at this problem in some depth. 
 
 ## Chapter 7 - Network Topology Inference 
 
@@ -75,6 +106,23 @@ For a concrete example, the consider the karate network with the goal to test to
 ## Chapter 9 - Anaysis of Network Flow Data
 
 ## Chapter 10 - Graphical Models 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

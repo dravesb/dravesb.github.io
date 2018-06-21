@@ -32,7 +32,7 @@ Input: Diagonalizable matrix $\mathbf{A}$ with dominate eigenvalue.
 
 1. Initialize a nonzero vector $x_0\in\mathbb{R}^{n\times 1}$
 2. Until convergence, $i = 1, 2, \ldots, m$:
-     + Let $\tilde{x}_{i}$ = \mathbf{A}x_{i-1}
+     + Let $\tilde{x}_{i} = \mathbf{A}x_{i-1}$
      + Let $c_i = \max(\tilde{x}_i)$
      + Update sequence $x_i = \frac{1}{c_i}\tilde{x}_i$
 
