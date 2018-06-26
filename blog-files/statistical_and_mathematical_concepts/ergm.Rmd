@@ -1,0 +1,23 @@
+---
+title: "Exponential Random Graph Models"
+author: "Benjamin Draves"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: vignette
+---
+
+##Motivation 
+
+***
+## Preliminaries
+
+***
+## The Power Method
+***
+## Example
+
+***
+## Conclusions & Future Topics
+
+
