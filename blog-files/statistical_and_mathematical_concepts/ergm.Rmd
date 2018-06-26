@@ -66,6 +66,8 @@ where $\mathbf{g}(\mathbf{y},\mathbf{x}) = \sum_{1\leq i <j \leq N_v}\gamma_{ij}
 ## Conclusions & Future Topics
 
 ERGMs extend the familiar structure of an exponential random family to network data. Through its construction, the probability structure is specified primarily by identifying dependent random variables as well as topological features of the network. Moreover, but making homogeneity assumptions and imposing parametric constraints on the model, there are few number of model parameters with clear interpretations. Lastly, by including vertex specific information, we can extend this class of models to the network regression realm. 
+
+
 This post was primarily focused on introducing ERMGs and not on model fitting procedures. In the future, an overview of the MCMC algorithms that provide parameter estimates would be an interesting topic to overview/implement. Lastly, several of the model reductions are only possible by use of the _Hammersley-Clifford Theorem_. An overview of this theorem's proof may prove useful. 
 
 
