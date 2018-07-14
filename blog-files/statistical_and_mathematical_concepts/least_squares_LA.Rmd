@@ -1,5 +1,5 @@
 ---
-title: "Leat Squares - A Linear Algebraic Perspective"
+title: "Least Squares - A Linear Algebraic Perspective"
 author: "Benjamin Draves"
 output:
   prettydoc::html_pretty:
