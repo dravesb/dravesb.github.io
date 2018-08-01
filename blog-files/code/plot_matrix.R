@@ -4,7 +4,7 @@
 #
 #------------------------------
 
-plot_matrix = function(A){
+plot_matrix = function(A,...){
   #input A - a square matrix
   require(ggplot2)
   require(reshape2)
