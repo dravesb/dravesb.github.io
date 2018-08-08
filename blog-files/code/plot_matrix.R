@@ -4,7 +4,7 @@
 #
 #------------------------------
 
-plot_matrix = function(A,...){
+plot_matrix = function(A,col = "red", main = "Adjacency Matrix"){
   #input A - a square matrix
   require(ggplot2)
   require(reshape2)
@@ -23,7 +23,7 @@ plot_matrix = function(A,...){
   #build gg object
   p = ggplot(aes(x = Column_ID, y = Row_ID, fill = Value), data = stack_A) + 
       geom_raster() +
-      scale_fill_gradient(low="white", high="red") +
+      scale_fill_gradient(low="white", high=col) +
       theme_bw() +
       theme(axis.line = element_line(color = "white"),
           panel.grid.major = element_blank(),
@@ -36,7 +36,7 @@ plot_matrix = function(A,...){
           axis.title.y=element_blank(),
           axis.text.y=element_blank(),
           axis.ticks.y=element_blank())+ 
-    labs(title = "Heatmap of given matrix")
+    labs(title = main)
       
   #output - a ggplot2 object
   return(p)
