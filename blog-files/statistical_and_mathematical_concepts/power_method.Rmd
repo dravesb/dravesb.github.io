@@ -1,5 +1,5 @@
 ---
-title: "Least Squares - Linear Algebraic Approach"
+title: "The Power Method"
 author: "Benjamin Draves"
 output:
   prettydoc::html_pretty:

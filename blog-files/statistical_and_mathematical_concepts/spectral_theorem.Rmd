@@ -1,0 +1,74 @@
+---
+title: "Spectral Theorem for Real Symmetric Matrices"
+author: "Benjamin Draves"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: vignette
+---
+
+##Motivation 
+
+***
+## The Spectral Theorem
+> Suppose that $A\in\mathbb{R}^{n\times n}$ and that $\mathbf{A}^T = \mathbf{A}$. Then the eigenvectors of $\mathbf{A}$, denoted $\{\mathbf{v}_i: 1\leq i \leq n\}$ form an orthonormal basis for $\mathbf{R}^n$. Moreover, if $\mathbf{V}$ is the matrix with the eigenvectors as its columns and $\Lambda$ is a diagonal matrix with the eigenvalues of $\mathbf{A}$ along the main diagonal, then we can decompose $\mathbf{A}$ as $$\mathbf{A} = \mathbf{V}\Lambda\mathbf{V}^T = \sum_{i=1}^n\lambda_i\mathbf{v_iv_i}^T$$  
+
+I find that the most simple way to remember this decomposition is to think of $\mathbf{A}$ corresponding to a linear operator acting on vectors $\mathbf{x}\in\mathbb{R}^{n\times 1}$. Recall that as $\mathbf{V}$ has an orthonormal basis written in the standard $\mathbb{R}^n$ coordinates that $\mathbf{V}$ acts as a change of basis matrix from the eigen-coordinate system of $\mathbf{A}$ back to the standard coordinates. Moreover, as $\mathbf{V}^T$ acts an inverse to $\mathbf{V}$, we can interpret $\mathbf{V}^{T}$ as a change of basis from the standard coordinates to the eigen-coordinate system. Lastly, recall that we define the eigenvectors of a matrix as those directions in which the matrix $\mathbf{A}$ acts a scaling (i.e. $\mathbf{Ax} = \lambda\mathbf{x}$). Hence, after rewritting $\mathbf{Ax}$ in the eigen-coordinate system, we simply scale the vector by the eigenvalues associated with each direction. This interpretation is summarized in the diagram below.
+
+$$\mathbf{Ax} = \underbrace{\mathbf{V}\overbrace{\Sigma\underbrace{\mathbf{V}^T\mathbf{x}}_{\text{Change Bais}}}^{\text{Scale}}}_{\text{Change basis back}}$$
+What makes the spectral theorem especially special is the fact that we required no spectial structure of the eigenvalues. As we will see, $\mathbf{A}$ being symmetric guarentees that each eigenvalue is real but says nothing about the multiplicity of each eigenvalue. In general for a square matrix, if the eigenvalues are *distinct* we can achieve the decomposition $\mathbf{X}^{-1}\mathbf{BX} = \mathbf{D}$. If the eigenvalues are not distinct, however, we can't guarentee this decomposition exists. In fact, if we associate each eigenvalue with its associated subspace $\mathbf{E}_{\lambda} = \{\mathbf{x}:\mathbf{Bx} = \lambda\mathbf{x}\}$ then in general $\text{dim}(\mathbf{E}_{\lambda})\leq r_\lambda$ where $r_{\lambda}$ is the multiplicity of $\lambda$. Howeover, if we require that $\mathbf{A}$ be symmetric, we will see that $\mathbf{E}_{\lambda} = r_{\lambda}$. Therefore, we can construct a basis of orthogonal, and by extension orthonormal, eigenvectors coming from the eigenspaces $\mathbf{E}_{\lambda}$. 
+
+In the proof of the Spectral Theorem we will see that the symmetric nature of $\mathbf{A}$ is central to this proof. Before we consider how we can construct this basis we will first give an example of this decomposition.
+
+
+***
+## Example
+
+> Consider the following matrix $$A = \begin{bmatrix} 2 & 1 \\ 1 & 2\end{bmatrix}$$ We can find its eigenvalues as follows \begin{align*}|\mathbf{A} - \lambda\mathbf{I}| &= \left|\begin{bmatrix}2 - \lambda & 1 \\ 1 & 2-\lambda\end{bmatrix}\right|\\ &= (2-\lambda)^2 - 1\\ &= \lambda^2 -4\lambda +3\end{align*} which has roots $\lambda = 1, 3$. Now notice that the eigenvector corresponding to $\lambda = 1$, $\mathbf{v}_1$, must satisfy $\mathbf{A}\mathbf{v}_1 = \mathbf{v}_1$ or $$(\mathbf{A} - \mathbf{I})\mathbf{v}_1 =\begin{bmatrix}1 & 1\\1 & 1\end{bmatrix}\begin{bmatrix}v_1\\v_2\end{bmatrix} = \begin{bmatrix}\mathbf{v}_1 + \mathbf{v}_2\\\mathbf{v}_1 + \mathbf{v}_2\end{bmatrix}0$$ 
+Notice the only vector that satisifies this equation with the constraint that $||\mathbf{v}_1||_2 = 1$ is $\mathbf{v} = \frac{1}{\sqrt{2}}(1,-1)^T$. In a similar fashion, we can find $\mathbf{v}_3 = \frac{1}{\sqrt{2}}(1,1)^T$. Therefore, by the spectral theorem we can facator $\mathbf{A}$ as the follows \begin{align*} 
+\mathbf{V}\Lambda\mathbf{V}^T &= \frac{1}{2}\begin{bmatrix}
+1 & 1\\
+-1 & 1 
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0\\
+ 0& 3 
+\end{bmatrix}
+\begin{bmatrix}
+1 & -1\\
+1 & 1 
+\end{bmatrix} = \frac{1}{2}\begin{bmatrix}
+1 & 1\\
+-1 & 1 
+\end{bmatrix}\begin{bmatrix}
+1 & -1\\
+3 & 3
+\end{bmatrix}\\
+&= \frac{1}{2}\begin{bmatrix} 4 & 2\\
+2 & 4
+\end{bmatrix} = \begin{bmatrix}2 & 1\\ 1 & 2\end{bmatrix} = \mathbf{A}
+\end{align*}
+
+***
+## Proof
+We will first show that symmetric matrices only emit real eigenvaules in the following lemma.
+
+> **Lemma**: Let $\mathbf{A}\in\mathbb{R}^{n\times n}$ with $\mathbf{A}^T=\mathbf{A}$. Then all eigenvalues of $\mathbf{A}$ are real.
+
+> **Proof**: Suppose that $\lambda\in\mathbb{C}$ is an eigenvalue of $\mathbf{A}$ with corresponding (possibly complex) eigenvector $\mathbf{x}\neq 0$. That is $\mathbf{Ax} = \lambda\mathbf{x}$. First note that since $\mathbf{A}$ has real entries, we know $\overline{A} = \mathbf{A}$. Now taking the complex conjugate sides of the previous equation we have $$\mathbf{A}\overline{\mathbf{x}} = \overline{\lambda}\overline{\mathbf{x}}$$ Now consider the following two equations
+\begin{align*}
+\langle\mathbf{A}\overline{\mathbf{x}},\mathbf{x}\rangle &= \overline{\mathbf{x}}^T\mathbf{A}^T\mathbf{x} = \overline{\mathbf{x}}^T\mathbf{A}\mathbf{x} = \langle\overline{\mathbf{x}},\mathbf{A}\mathbf{x}\rangle = \langle\overline{\mathbf{x}},\lambda\mathbf{x}\rangle = \lambda\langle\overline{\mathbf{x}},\mathbf{x}\rangle\\
+\langle\mathbf{A}\overline{\mathbf{x}},\mathbf{x}\rangle &= \langle\overline{\mathbf{A}\mathbf{x}},\mathbf{x}\rangle = \langle\overline{\lambda\mathbf{x}},\mathbf{x}\rangle = \langle\overline{\lambda}\overline{\mathbf{x}},\mathbf{x}\rangle = \overline{\lambda}\langle\overline{\mathbf{x}},\mathbf{x}\rangle
+\end{align*}
+Now, as $\mathbf{x}\neq 0$ we see that $\langle\overline{\mathbf{x}},\mathbf{x}\rangle>0$ and we remove this term and we see that $\overline{\lambda} = \lambda$. That is $\lambda\in\mathbb{R}$. Now, as we took an aribtrary eigenvalue of $\mathbf{A}$ we see that $\lambda(\mathbf{A})\subset\mathbb{R}$
+
+> **Proof of Spectral Theorem: We will 
+
+***
+## Conclusions & Future Topics
+
+
+
+
+
+
