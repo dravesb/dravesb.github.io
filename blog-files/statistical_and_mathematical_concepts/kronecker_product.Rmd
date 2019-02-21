@@ -1,0 +1,67 @@
+---
+title: "Kronecker Product"
+author: "Benjamin Draves"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: vignette
+---
+
+##Motivation 
+In several settings, it is convenient to write a matrix as the Kronecker Product of two more fundamental matrices. The Kronecker product of two matrices $\mathbf{A}\in\mathbb{R}^{n\times m}$ and $\mathbf{B}\in\mathbb{R}^{k\times \ell}$ is given by 
+<center>
+$\mathbf{A}\otimes \mathbf{B} = \begin{bmatrix}
+a_{11}\mathbf{B} & \dots & a_{1m}\mathbf{B}\\
+a_{21}\mathbf{B} & \dots & a_{2m}\mathbf{B}\\
+\vdots & \vdots & \vdots\\
+a_{n1}\mathbf{B} & \dots & a_{nm}\mathbf{B}
+\end{bmatrix}\in \mathbb{R}^{nk \times m\ell}$
+</center>
+
+One setting in which this structure is quite useful is the Stochastic Block Model (SBM) when the group sizes are equal. 
+For example, suppose we have a network $\mathbf{A}\sim \text{SBM}(m, n, \mathbf{B})$ where $\mathbf{B}\in\mathbb{R}^{m\times m}$ specifies the block probabilities. With this structure, we see that
+$$\mathbf{P}\equiv \mathbb{E}[A]  = \mathbf{B}\otimes \mathbf{J}_n$$ where $\mathbf{J}_n$ is the $n\times n$ matrix of all ones. 
+With this, we see we can study the spectral properties of the expected adjacency matrix (as well as its associated Laplacian) through much simpler matrices $\mathbf{B}$ and $\mathbf{J}_n$.
+This has direct applications for analyzing the preformance of several spectral based statistical procedures such spectral clustering. 
+Determining how exactly the spectrum of $\mathbf{P}$ relate to $\mathbf{B}$ and $\mathbf{J}_n$ will be the focus of this article. 
+Before we investigate this problem, however, we spend some time listing a few properties of the Kronecker Product. 
+
+***
+## Properties
+
+In this section we list some useful properties of the Kronecker product. We state these results without proof.
+For a complete treatment of this operator, [check this out](https://www.math.uwaterloo.ca/~hwolkowi/henry/reports/kronthesisschaecke04.pdf). 
+
+1. The Kronecker product is _bilinear_ and _associative_. 
+2. If the matrix multiplication $\mathbf{AC}$ and $\mathbf{BD}$ is well defined then $$(\mathbf{A}\otimes \mathbf{B})(\mathbf{C}\otimes \mathbf{D}) = \mathbf{AC}\otimes \mathbf{BD}$$
+3. If $\mathbf{A}$ and $\mathbf{B}$ have (pseudo) inverses then so does $\mathbf{A}\otimes \mathbf{B}$ where 
+\begin{align*}
+(\mathbf{A}\otimes \mathbf{B})^{-1} &= \mathbf{A}^{-1}\otimes\mathbf{B}^{-1}\\
+(\mathbf{A}\otimes \mathbf{B})^{+} &= \mathbf{A}^{+}\otimes\mathbf{B}^{+}\\
+\end{align*}
+4. Transposes are distributive so that $(\mathbf{A}\otimes \mathbf{B})^T = \mathbf{A}^T\otimes \mathbf{B}^T$
+5. For the matrix exponential function $\exp(\cdot)$ we have the special property that $\exp(\mathbf{A}\otimes\mathbf{B}) = \exp(\mathbf{A})\otimes \exp(\mathbf{B})$. 
+
+Having given a few properties of this operator, we now move to connecting the spectrum of $\mathbf{P}$ to the spectrum of $\mathbf{B}$ and $\mathbf{J}_n$..
+
+***
+## Spectral Properties
+
+Suppose that $\mathbf{A} = \mathbf{B}\otimes \mathbf{C}$.
+Through a direct proof, we can connect the spectral structure of $\mathbf{A}$ to that of $\mathbf{B}$ and $\mathbf{C}$. 
+
+> **Theorem**: Let $\lambda(\mathbf{M})$ be the set of eigenvalues for the symmetric, real matrix $\mathbf{M}$. Similarly, let $v(\mathbf{M})$ be the set of orthonormal eigenvectors for $\mathbf{M}$. Then for matrix $\mathbf{A} = \mathbf{B}\otimes \mathbf{C}$ has $$\lambda(\mathbf{A}) = \{\lambda_i\theta_j; \lambda_i\in\lambda(\mathbf{B}),\theta_j\in\lambda(\mathbf{C}),\forall i,j\}$$ Moreover, $$v(\mathbf{A}) = \{v_i\otimes w_j; v_i\in v(\mathbf{B}), w_j\in v(\mathbf{C}),\forall i,j\}$$
+
+> **Proof**: Suppose that $(v, \lambda)$ is _any_ eigenvector-eigenvalue pair of $\mathbf{B}$ and $(w, \theta)$ is _any_ eigenvector-eigenvalue pair of $\mathbf{C}$. Then consider the following 
+\begin{align*}
+\mathbf{A}(v\otimes w) &= (\mathbf{B}\otimes \mathbf{C})(v\otimes w)\\
+&= \mathbf{B}v\otimes \mathbf{C}w\quad [\text{Prop. 2}]\\
+&= \lambda v\otimes \theta w\\
+&= \lambda\theta v\otimes w \quad [\text{Prop. 1}]\\
+&= \left(\lambda\theta\right) \left(v\otimes w\right)\\
+\end{align*}
+Therefore, $(\lambda\theta, v\otimes w)$ serves as an eigenvector-eigenvalue pair of $\mathbf{A}$. As $(\lambda, v)$ and $(\theta, w)$ were general eigen-pairs of $\mathbf{B}$ and $\mathbf{C}$, this relation holds for all combiniations of $(\lambda, v)$ and $(\theta, w)$. This concludes the proof. 
+
+> **Example**: In our example above, we see that the spectral structure of $\mathbf{P}$ is given by the spectral structure of $\mathbf{B}$ and $\mathbf{J}_n$. Notice that $v(\mathbf{J}_n) = n^{-1/2}1_n$ and $\lambda(\mathbf{J}_n) = n$. Therefore all the eigenvalues of $\mathbf{P}$ are simply $n\theta$ where $\theta\in\lambda(\mathbf{B})$. Moreover, the eigenvectors of $\mathbf{P}$ are given by $n^{-1/2} w\otimes 1_n$ for $w\in v(\mathbf{B})$. Therefore, understanding the spectral structure of $\mathbf{B}$, the block probability matrix, will let us understand the spectral structure of  $\mathbf{P}$. This understanding will be quite helpful in analyzing methods, techniques, and models that utilize spectral properties of the adjacency matrix.
+
+
