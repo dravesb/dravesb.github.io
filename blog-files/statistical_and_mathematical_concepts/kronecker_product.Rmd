@@ -22,7 +22,7 @@ One setting in which this structure is quite useful is the Stochastic Block Mode
 For example, suppose we have a network $\mathbf{A}\sim \text{SBM}(m, n, \mathbf{B})$ where $\mathbf{B}\in\mathbb{R}^{m\times m}$ specifies the block probabilities. With this structure, we see that
 $$\mathbf{P}\equiv \mathbb{E}[A]  = \mathbf{B}\otimes \mathbf{J}_n$$ where $\mathbf{J}_n$ is the $n\times n$ matrix of all ones. 
 With this, we see we can study the spectral properties of the expected adjacency matrix (as well as its associated Laplacian) through much simpler matrices $\mathbf{B}$ and $\mathbf{J}_n$.
-This has direct applications for analyzing the preformance of several spectral based statistical procedures such spectral clustering. 
+This has direct applications for analyzing the performance of several spectral based statistical procedures such spectral clustering. 
 Determining how exactly the spectrum of $\mathbf{P}$ relate to $\mathbf{B}$ and $\mathbf{J}_n$ will be the focus of this article. 
 Before we investigate this problem, however, we spend some time listing a few properties of the Kronecker Product. 
 
@@ -42,7 +42,7 @@ For a complete treatment of this operator, [check this out](https://www.math.uwa
 4. Transposes are distributive so that $(\mathbf{A}\otimes \mathbf{B})^T = \mathbf{A}^T\otimes \mathbf{B}^T$
 5. For the matrix exponential function $\exp(\cdot)$ we have the special property that $\exp(\mathbf{A}\otimes\mathbf{B}) = \exp(\mathbf{A})\otimes \exp(\mathbf{B})$. 
 
-Having given a few properties of this operator, we now move to connecting the spectrum of $\mathbf{P}$ to the spectrum of $\mathbf{B}$ and $\mathbf{J}_n$..
+Having given a few properties of this operator, we now move to connecting the spectrum of $\mathbf{P}$ to the spectrum of $\mathbf{B}$ and $\mathbf{J}_n$.
 
 ***
 ## Spectral Properties
