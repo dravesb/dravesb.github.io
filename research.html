@@ -42,12 +42,21 @@ br {
 
 
 <h3>Multiple Graph Embeddings</h3>
-<p> My current research focuses on multiple network inference problems. In particular, I am interested in analyzing networks through spectral properties of their adjacency matrices. Under the Random Dot Product Graph model, networks are characterized by latent vectors associated with each vertex in the graph. Edge presence is then modeled as a Bernoulli random variable with probability given by the dot product of the two latent vectors associated with the edge. Adopting this low-rank model, we transform often difficult network analysis problems into problems that exist in low dimensional Euclidean space where most statistical techniques can be utilized. 
-
-While there is a wide body of reseach studying embeddings in the single network setting, the study of simultaneous embeddings in the multiple graph setting is in its infancy. Recently, embeddings for multiple networks with a common latent position structure have been studied. In the presence of heterogenous networks, however, these techniques are less understood. In my research, we look to analyze the bias-variance tradeoff introduced by these embeddings in the multiple network setting. 
+<p> Latent position models and their corresponding estimation procedures offer a statistically principled
+paradigm for multiple network inference by translating multiple network analysis problems to familiar
+tasks in multivariate statistics. 
+Latent position estimation is a fundamental task in this framework yet
+most work focus only on unbiased estimation procedures. 
+We consider the ramifications of utilizing biased latent position estimates in subsequent statistical analysis in exchange for sizable variance reductions in finite networks. 
+We establish an explicit bias-variance tradeoff for latent position estimates produced by the omnibus embedding of Levin et al. (2017) in the presence of heterogeneous network data. 
+We reveal an analytic bias expression, derive a uniform concentration bound on the residual term, and prove a
+central limit theorem characterizing the distributional properties of these estimates. 
+These explicit bias and variance expressions enable us to show that the omnibus embedding estimates are often preferable to comparable estimators with respect to mean square error, state sufficient conditions for exact recovery in community detection tasks, and develop a test statistic to determine whether two graphs share the same
+set of latent positions. 
+These results are demonstrated in several experimental settings where community detection algorithms and hypothesis testing procedures utilizing the biased latent position estimates are competitive, and oftentimes preferable, to unbiased latent position estimates. 
 </p>
 
-<img src="../images/DSRDPG.jpg" alt="Bias" style="width:700px;height:325px;" ALIGN = "center" HSPACE="12"><p>
+<img src="../images/1d_mse.jpg" alt="Bias" style="width:700px;height:325px;" ALIGN = "center" HSPACE="12"><p>
 
 <p>
 I have had the opportunity to present this work at the following conferences and workshops. 
