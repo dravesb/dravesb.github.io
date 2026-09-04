@@ -4,62 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PTrees &mdash; Benjamin Draves</title>
-<meta name="description" content="PTrees is simulation software that generates familial pedigree structures and associated genetic panels at scale, used to study treelet covariance smoothers.">
-<link rel="canonical" href="https://dravesb.github.io/PTrees">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PTrees &mdash; Benjamin Draves">
-<meta property="og:description" content="PTrees is simulation software that generates familial pedigree structures and associated genetic panels at scale, used to study treelet covariance smoothers.">
-<meta property="og:url" content="https://dravesb.github.io/PTrees">
-<meta property="og:image" content="https://dravesb.github.io/images/headshot.jpg">
-<meta name="twitter:card" content="summary">
+<meta name="description" content="PTrees by Benjamin Draves. This page has moved to the home page.">
+<link rel="canonical" href="https://dravesb.github.io/">
+<meta http-equiv="refresh" content="0; url=/">
+<meta name="robots" content="noindex, follow">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231155cc'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='Helvetica,Arial' fill='white'>D</text></svg>">
 <link rel="stylesheet" href="/stylesheets/site.css">
+<script>window.location.replace("/");</script>
 </head>
 <body>
-
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">Benjamin Draves, Ph.D.</a>
   </div>
 </header>
-
-<div class="page-head">
-  <div class="wrap">
-    <h1>PTrees</h1>
-    <p>Simulating pedigree structure and genetic panels at scale.</p>
-  </div>
-</div>
-
 <main class="wrap">
-
   <section class="block">
-    <h2>Software overview</h2>
-    <p>PTrees generates familial structure from a handful of parameters set in a configuration file: the number of families, the number of generations, the probability of reproduction, and the maximum and minimum number of offspring. For an example, see <code>config.txt</code> in the PTrees repository. The tree structures themselves are simulated in Java. A few examples follow.</p>
-
-    <p>This first example shows a familial structure with 8 generations. The configuration file requested 10, but because reproduction is probabilistic the parameter only caps growth rather than guaranteeing it. This is a simple one-family tree in which all individuals are related.</p>
-    <figure><img src="/images/ptrees-1.png" alt="A single-family pedigree spanning eight generations" width="500"></figure>
-
-    <p>The second example shows three separate families of varying height and relationship. You can imagine how noisy a relationship matrix for this population would be. In the family at the bottom right, the leaf individuals share only 0.0195% of their genetic material &mdash; distinguishing that from the estimated relationship between unrelated individuals is a genuinely hard task, which is exactly why treelet covariance smoothers are interesting.</p>
-    <figure><img src="/images/ptrees-2.png" alt="Three separate pedigrees of varying height and relatedness" width="550"></figure>
-
-    <p>This third example is more confusing still. Several unrelated individuals are introduced to mask the distant relationships further. It is also much closer to what a practitioner actually sees: a number of unrelated people with little known structure.</p>
-    <figure><img src="/images/ptrees-3.png" alt="A pedigree with unrelated individuals introduced to mask distant relationships" width="600"></figure>
-
-    <h2>Generating genetic panels</h2>
-    <p>Once the pedigree structure is generated and the number of SNPs is specified, PTrees follows a simple probabilistic method to assign genetic panels. By default, SNPs are evenly placed across the first 22 chromosomes.</p>
-    <p>PTrees first randomly generates minor allele frequencies (MAF) between 0.05 and 0.5 for each sample on the genome. It then walks the pedigree: if an individual is a founder, it assigns a minor allele count (MAC) by sampling from a binomial with probability equal to the MAF. If an individual has both parents in the pedigree, PTrees chooses the MAC with equal probability from the mother and father and assigns that value to the individual&rsquo;s panel.</p>
-    <p>This is in no way a realistic representation of how genetic information actually passes through a pedigree. That problem is both much harder to simulate in general and specific to a population. PTrees makes some strong assumptions, and in exchange the user gets a fast, easy way to produce familial structures with associated genetic information at scale.</p>
-    <p>From there PTrees uses Plink to format bed, bim, and fam files. A simple GCTA call &mdash; not implemented here &mdash; then produces an estimated relationship matrix that can be compared against the known relationships in the generated pedigree.</p>
+    <h2>This page has moved</h2>
+    <p>This page is no longer maintained. You should be redirected to the <a href="/">home page</a> automatically.</p>
   </section>
-
 </main>
-
-<footer>
-  <div class="footer-inner">
-    <span>&copy; Benjamin Draves</span>
-    <span><a href="/">Home</a> &middot; <a href="mailto:benjamin.draves@gmail.com">Email</a> &middot; <a href="https://github.com/dravesb">GitHub</a></span>
-  </div>
-</footer>
-
 </body>
 </html>

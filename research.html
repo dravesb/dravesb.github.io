@@ -4,89 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Research &mdash; Benjamin Draves</title>
-<meta name="description" content="Research on joint spectral embeddings, bias-variance tradeoffs in the omnibus embedding, and sparse covariance estimation with treelet smoothers.">
-<link rel="canonical" href="https://dravesb.github.io/research">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Research &mdash; Benjamin Draves">
-<meta property="og:description" content="Research on joint spectral embeddings, bias-variance tradeoffs in the omnibus embedding, and sparse covariance estimation with treelet smoothers.">
-<meta property="og:url" content="https://dravesb.github.io/research">
-<meta property="og:image" content="https://dravesb.github.io/images/headshot.jpg">
-<meta name="twitter:card" content="summary">
+<meta name="description" content="Research by Benjamin Draves. This page has moved to the home page.">
+<link rel="canonical" href="https://dravesb.github.io/">
+<meta http-equiv="refresh" content="0; url=/">
+<meta name="robots" content="noindex, follow">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231155cc'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='Helvetica,Arial' fill='white'>D</text></svg>">
 <link rel="stylesheet" href="/stylesheets/site.css">
+<script>window.location.replace("/");</script>
 </head>
 <body>
-
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="/">Benjamin Draves, Ph.D.</a>
   </div>
 </header>
-
-<div class="page-head">
-  <div class="wrap">
-    <h1>Research</h1>
-    <p>Spectral embeddings for multiple networks, and covariance estimation.</p>
-  </div>
-</div>
-
 <main class="wrap">
-
   <section class="block">
-    <h2>Joint spectral embeddings</h2>
-    <p class="meta"><a href="https://arxiv.org/abs/2005.02511">Preprint</a> &middot; <a href="https://github.com/dravesb/BV-Tradeoffs-in-JSE">Code</a></p>
-    <p>Latent position models and their corresponding estimation procedures offer a statistically principled paradigm for multiple network inference, translating multiple network analysis problems into familiar tasks in multivariate statistics. Latent position estimation is fundamental in this framework, yet most work focuses only on unbiased estimation procedures.</p>
-    <p>We consider the ramifications of using biased latent position estimates in subsequent statistical analysis in exchange for sizable variance reductions in finite networks. We establish an explicit bias&ndash;variance tradeoff for estimates produced by the omnibus embedding of Levin et al. (2017) in the presence of heterogeneous network data: we reveal an analytic bias expression, derive a uniform concentration bound on the residual term, and prove a central limit theorem characterizing the distributional properties of these estimates.</p>
-    <p>These explicit bias and variance expressions let us show that omnibus embedding estimates are often preferable to comparable estimators with respect to mean squared error, state sufficient conditions for exact recovery in community detection, and develop a test statistic for whether two graphs share the same set of latent positions. We demonstrate this in several experimental settings where community detection and hypothesis testing procedures built on the biased estimates are competitive with &mdash; and often preferable to &mdash; their unbiased counterparts.</p>
-    <figure>
-      <img src="/images/1d_mse.jpg" alt="Mean squared error comparison between biased and unbiased latent position estimates" width="600">
-      <figcaption>Mean squared error of biased versus unbiased latent position estimates.</figcaption>
-    </figure>
-    <h3>Presented at</h3>
-    <ul class="linklist">
-      <li>Joint Statistical Meetings 2020 <span class="note"><a href="https://github.com/dravesb/BV-Tradeoffs-in-JSE/blob/master/JSM_2020/main.pdf">Slides</a> &middot; <a href="https://www.youtube.com/watch?v=g-iqNNZl2_E">Video</a></span></li>
-      <li>Joint Statistical Meetings 2019 <span class="note"><a href="/presentation-slides/JSM_Presentation.pdf">Slides</a></span></li>
-      <li>Center for Information &amp; Systems Engineering Student Workshop <span class="note"><a href="/presentation-slides/CISE_BSE_Presentation.pdf">Slides</a></span></li>
-    </ul>
+    <h2>This page has moved</h2>
+    <p>This page is no longer maintained. You should be redirected to the <a href="/">home page</a> automatically.</p>
   </section>
-
-  <section class="block">
-    <h2>Sparse covariance estimation</h2>
-    <p>This project focuses on improving estimates of large, sparse covariance matrices. In many applications practitioners believe the correlation between samples should be relatively low, but in practice samples are often clustered into small homogeneous sets. In large medical studies, for example, entire families frequently participate: across the dataset there is little correlative structure, yet the data still consists of small, closely clustered groups.</p>
-    <p>To leverage that structure we use treelets to build a smoothed estimate of the covariance matrix, iteratively constructing a basis that more naturally captures the variance in the dataset, then thresholding eigenvalues in the new basis to encourage a parsimonious structure. With applications in statistical genetics, we used treelet smoothers to improve estimates of distant relatedness.</p>
-    <figure>
-      <img src="/images/basis_plot.jpg" alt="Treelet basis functions used to smooth a covariance estimate" width="600">
-      <figcaption>Treelet basis functions used to smooth the covariance estimate.</figcaption>
-    </figure>
-    <h3>Presented at</h3>
-    <ul class="linklist">
-      <li>Lafayette College thesis defense <span class="note"><a href="/presentation-slides/thesis_defense.pdf">Slides</a></span></li>
-      <li>Moravian Undergraduate Mathematics Conference <span class="note"><a href="/presentation-slides/moravian.pdf">Slides</a></span></li>
-    </ul>
-    <p>The simulation software behind this work is described on the <a href="/PTrees">PTrees</a> page.</p>
-  </section>
-
-  <section class="block">
-    <h2>Course projects</h2>
-    <p>A handful of longer write-ups from graduate coursework.</p>
-    <ul class="linklist">
-      <li><a href="/projects/ML_Final_Project_Report.pdf">Machine Learning</a></li>
-      <li><a href="/projects/FlyMCMC.pdf">Large Scale Bayesian Computation</a></li>
-      <li><a href="/projects/comp_stats_report.pdf">Computational Statistics</a></li>
-      <li><a href="/projects/nonparametric_report.pdf">Semi/Nonparametric Data Analysis</a></li>
-      <li><a href="/projects/glm_final_project.pdf">Generalized Linear Models</a></li>
-      <li><a href="/projects/linear_models_final_paper.pdf">Linear Models</a></li>
-    </ul>
-  </section>
-
 </main>
-
-<footer>
-  <div class="footer-inner">
-    <span>&copy; Benjamin Draves</span>
-    <span><a href="/">Home</a> &middot; <a href="mailto:benjamin.draves@gmail.com">Email</a> &middot; <a href="https://github.com/dravesb">GitHub</a></span>
-  </div>
-</footer>
-
 </body>
 </html>

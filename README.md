@@ -2,18 +2,14 @@
 
 Personal site for Benjamin Draves, served by GitHub Pages at <https://dravesb.github.io>.
 
-Plain static HTML — no build step. Shared styles live in `stylesheets/site.css`;
-each page carries its own nav, so update all of them together when the nav changes.
+A single page of plain static HTML — no build step. `index.html` is the site;
+styles live in `stylesheets/site.css`.
 
-| File | URL |
-| --- | --- |
-| `index.html` | `/` |
-| `about.html` | `/about` |
-| `research.html` | `/research` |
-| `presentations.html` | `/presentations` |
-| `blog.html` | `/blog` |
-| `PTrees.html` | `/PTrees` |
+`about.html`, `research.html`, `presentations.html`, `blog.html`, and
+`PTrees.html` are redirect stubs. They point at `/` with a canonical tag so the
+URLs Google already indexed keep working instead of 404ing. Don't delete them
+without a reason.
 
-Also here: `sitemap.xml`, `robots.txt`, a `404.html`, and JSON-LD `Person` markup
-on the home page. Update `sitemap.xml`'s `lastmod` dates when content changes
-substantially.
+The files those retired pages used to link to are still in the repo, unlinked,
+so direct links to them keep working: `presentation-slides/`, `projects/`,
+`blog-files/`, and the research figures in `images/`.
