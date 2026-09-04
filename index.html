@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://dravesb.github.io/">
 <meta property="og:image" content="https://dravesb.github.io/images/headshot.jpg">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a73e8'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='Helvetica,Arial' fill='white'>D</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231155cc'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='Helvetica,Arial' fill='white'>D</text></svg>">
 <link rel="stylesheet" href="/stylesheets/site.css">
 <script type="application/ld+json">
 {
@@ -48,103 +48,65 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="/">Benjamin Draves, Ph.D.</a>
-    <ul class="nav-links">
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">Benjamin Draves, Ph.D.</a>
+    <ul class="topnav">
       <li><a href="/research">Research</a></li>
       <li><a href="/presentations">Talks</a></li>
       <li><a href="/blog">Writing</a></li>
       <li><a href="/images/Resume.pdf">CV</a></li>
     </ul>
   </div>
-</nav>
-
-<header class="hero">
-  <div class="hero-inner">
-    <img class="hero-photo" src="/images/headshot.jpg" alt="Benjamin Draves">
-    <div>
-      <h1>Benjamin Draves</h1>
-      <p class="tagline">Staff Applied Scientist at Uber, NYC — recommendation, targeting, and causal ML.</p>
-      <div class="hero-links">
-        <a class="btn btn-primary" href="mailto:benjamin.draves@gmail.com">Email</a>
-        <a class="btn" href="https://github.com/dravesb">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/benjamin-draves-347893167/">LinkedIn</a>
-        <a class="btn" href="/images/Resume.pdf">CV</a>
-      </div>
-    </div>
-  </div>
 </header>
 
 <main class="wrap">
 
-  <section class="block">
-    <p class="lead">I&rsquo;m a Staff Applied Scientist at Uber in NYC where I build ML recommendation and targeting systems.</p>
-    <p>I hold a Ph.D. in Statistics from Boston University, where I studied graph embeddings and inference under <a href="https://math.bu.edu/people/sussman/">Dan Sussman</a> and wrote a <a href="https://open.bu.edu/handle/2144/45235">dissertation</a> on spectral embedding methods for multiple network data. That work, and the talks around it, are collected under <a href="/research">research</a>.</p>
-    <p>Day to day I work on personalization, targeting, and GenAI applications in CRM, and co-organize a CausalML reading group at Uber. Outside of work: soccer, running, and exploring NYC.</p>
-  </section>
+  <section class="split">
+    <div>
+      <img class="portrait" src="/images/headshot.jpg" alt="Benjamin Draves" width="891" height="1280">
+    </div>
+    <div>
+      <h2>Welcome</h2>
+      <p>I&rsquo;m a Staff Applied Scientist at Uber in NYC where I build ML recommendation and targeting systems. I hold a Ph.D. in Statistics from Boston University where I studied <a href="/research">graph embeddings and inference</a>.</p>
 
-  <section class="block">
-    <h2>Topics that excite me</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Recommendation systems</h3>
-        <p>Large-scale ranking and retrieval — deciding who should see what.</p>
-      </div>
-      <div class="card">
-        <h3>Causal machine learning</h3>
-        <p>Estimating and ranking treatment effects to drive decisions, not just predictions.</p>
-      </div>
-      <div class="card">
-        <h3>Graph embeddings &amp; inference</h3>
-        <p>Latent position models, spectral methods, and what you can infer from an embedding.</p>
-      </div>
+      <h2>Machine Learning Topics that Excite Me</h2>
+      <ul class="bullets">
+        <li>Recommendation Systems</li>
+        <li>Causal Machine Learning</li>
+        <li>Graph Embeddings and Inference</li>
+      </ul>
+
+      <h2>Experiences &amp; Education</h2>
+      <ul class="bullets">
+        <li>[2022&ndash;Present] Staff Applied Scientist @ Uber</li>
+        <li>[2017&ndash;2022] Ph.D. | M.A. in Stat @ Boston University</li>
+        <li>[2014&ndash;2017] B.S. in Math @ Lafayette College</li>
+      </ul>
+
+      <h2>Contact</h2>
+      <ul class="bullets">
+        <li><a href="mailto:benjamin.draves@gmail.com">benjamin.draves@gmail.com</a></li>
+        <li><a href="https://github.com/dravesb">github.com/dravesb</a></li>
+        <li><a href="https://www.linkedin.com/in/benjamin-draves-347893167/">LinkedIn</a></li>
+      </ul>
     </div>
   </section>
 
-  <section class="block">
-    <h2>Experience &amp; education</h2>
-    <ul class="timeline">
-      <li>
-        <span class="when">2022 &ndash; Present</span>
-        <span class="what"><strong>Staff Applied Scientist</strong><span class="where">Uber &middot; New York, NY</span></span>
-      </li>
-      <li>
-        <span class="when">2017 &ndash; 2022</span>
-        <span class="what"><strong>Ph.D. &amp; M.A. in Statistics</strong><span class="where">Boston University</span></span>
-      </li>
-      <li>
-        <span class="when">2014 &ndash; 2017</span>
-        <span class="what"><strong>B.S. in Mathematics</strong><span class="where">Lafayette College</span></span>
-      </li>
-    </ul>
-  </section>
+  <hr class="heavy">
 
-  <section class="block">
-    <h2>News</h2>
-    <ul class="news">
-      <li>
-        <span class="when">May &rsquo;26</span>
-        <span class="what">Co-organized a CausalML reading group at Uber with scientists and engineers across multiple organizations.</span>
-      </li>
-      <li>
-        <span class="when">Apr &rsquo;26</span>
-        <span class="what">Presented at the University of Chicago&rsquo;s Data Science Institute on ranking causal effects and applied topics in CausalML.</span>
-      </li>
-      <li>
-        <span class="when">Jan &rsquo;26</span>
-        <span class="what">Spoke to a group of undergraduates at Lafayette College on careers in ML and AI.</span>
-      </li>
-      <li>
-        <span class="when">Sep &rsquo;25</span>
-        <span class="what">Promoted to Staff Applied Scientist, focusing on personalization, targeting, and GenAI applications in CRM.</span>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block">
-    <h2>Contact</h2>
-    <p><a href="mailto:benjamin.draves@gmail.com">benjamin.draves@gmail.com</a></p>
+  <section class="split">
+    <div>
+      <h2 class="section-title">🗞️ News 🗞️</h2>
+    </div>
+    <div>
+      <ul class="bullets spaced">
+        <li><span class="when">May &rsquo;26</span> &ndash; Co-organized a CausalML reading group at Uber with Scientists and Engineers across multiple organizations.</li>
+        <li><span class="when">Apr &rsquo;26</span> &ndash; Presented at University of Chicago&rsquo;s Data Science Institute on Ranking Causal Effects and applied topics in CausalML.</li>
+        <li><span class="when">Jan &rsquo;26</span> &ndash; Spoke to a group of undergraduates at Lafayette College on careers in ML and AI.</li>
+        <li><span class="when">Sep &rsquo;25</span> &ndash; Promoted to Staff Applied Scientist focusing on Personalization, Targeting, &amp; GenAI applications in CRM.</li>
+      </ul>
+    </div>
   </section>
 
 </main>
